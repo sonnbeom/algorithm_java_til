@@ -72,8 +72,6 @@ public class Main {
         System.out.println("one이 나오겠죠"+ q.poll());
         System.out.println("q가 비었나요? false 겠죳"+ q.isEmpty());
 
-        A b = new B();
-        b.paint();
 
     }
 
