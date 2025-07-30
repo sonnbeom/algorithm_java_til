@@ -47,7 +47,7 @@ public class 백준_동전2 {
                 }
             }
         }
-        if (answer == Integer.MAX_VALUE)System.out.print(-1);
+        if (answer == Integer.MAX_VALUE) System.out.print(-1);
 
         else System.out.println(answer);
     }
