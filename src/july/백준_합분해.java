@@ -38,7 +38,7 @@ public class 백준_합분해 {
                 continue;
             }
 
-            for(int i = 0; i <= n; i++){
+            for(int i = 0; i <= n - sum; i++){
                 if (i+sum <= n && time+1 <= k){
                     q.offer(new int[]{time+1, i+sum});
                 }
