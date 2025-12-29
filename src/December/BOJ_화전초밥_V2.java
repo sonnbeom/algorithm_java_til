@@ -15,6 +15,37 @@ public class BOJ_화전초밥_V2 {
         int[] belt = new int[N];
         for (int i = 0; i < N; i++) belt[i] = Integer.parseInt(br.readLine());
 
+        int[] cnt = new int[d+1];
+        int distinct = 0;
 
+        for (int i = 0; i < k; i++) {
+            int x = belt[i];
+            if (cnt[x] == 0){
+                distinct ++;
+            }
+            cnt[x]++;
+        }
+
+        int max = distinct;
+        if (cnt[c] == 0){
+            max += 1;
+        }
+
+        for (int i = 1; i < N; i++) {
+            // 빠지는 초밥
+            int out = belt[i-1];
+            cnt[out]--;
+            if (cnt[out] == 0) distinct--;
+
+            // 들어오는 초밥
+            int in = belt[(i + k -1) % N];
+            if (cnt[in] == 0) distinct++;
+            cnt[in]++;
+
+            int plus = cnt[c] == 0 ? 1 : 0;
+            max = Math.max(distinct+plus, max);
+
+        }
+        System.out.println(max);
     }
 }
