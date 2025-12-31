@@ -9,18 +9,41 @@ public class BOJ_합이0 {
         int n = Integer.parseInt(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int[] students = new int[n];
+        int[] a = new int[n];
         for (int i = 0; i < n; i++) {
-            students[i] = Integer.parseInt(st.nextToken());
+            a[i] = Integer.parseInt(st.nextToken());
         }
-        int cnt = 0;
+        // 0 -2 -2 -2 2 2 2 2 r = 6 l = 1
+        Arrays.sort(a);
+        long cnt = 0;
+
         for (int i = 0; i < n-2; i++) {
-            for (int j = i+1; j < n-1; j++) {
-                for (int k = j+1; k < n; k++) {
-                    int sum = students[i] + students[j] + students[k];
-                    if (sum == 0){
-                        cnt ++;
+            int l = i + 1;
+            int r = n - 1;
+            while (l < r){
+                int sum = a[i] + a[l] + a[r];
+                if (sum < 0) l++;
+                else if (sum > 0) r--;
+                else {
+                    if (a[l] == a[r]){
+                        long m = r - l + 1;
+                        cnt += m * (m-1) / 2;
+                        break;
                     }
+
+                    int lv = a[l];
+                    long lc = 0;
+                    while (l < r && a[l] == lv){
+                        lc ++;
+                        l++;
+                    }
+                    int rv = a[r];
+                    long rc = 0;
+                    while (l <= r && a[r] == rv){
+                        rc ++;
+                        r--;
+                    }
+                    cnt += lc * rc;
                 }
             }
         }
