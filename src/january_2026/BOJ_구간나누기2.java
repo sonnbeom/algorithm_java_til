@@ -10,48 +10,39 @@ public class BOJ_구간나누기2 {
         int m = Integer.parseInt(st.nextToken());
         int[] arr = new int[n];
         st = new StringTokenizer(br.readLine());
-        int high = Integer.MIN_VALUE;
-        int low = Integer.MAX_VALUE;
+        int h = Integer.MIN_VALUE;
+        int l = Integer.MAX_VALUE;
         for (int i = 0; i < n; i++) {
             int s = Integer.parseInt(st.nextToken());
-            if (s < low) low = s;
-            if (s > high) high = s;
+            if (s < l) l = s;
+            if (s > h) h = s;
             arr[i] = s;
         }
-        boolean[] visited = new boolean[n];
-        int ans = Integer.MAX_VALUE;
-        while (true){
-            int mid = (high-low)/ 2;
-            int temp = Integer.MIN_VALUE;
-            if (visited[mid]){
-                break;
-            }
-            visited[mid] = true;
-            int check = 0;
-            int now = Integer.MIN_VALUE;
-            for (int i = 0; i < n; i++) {
-                // 숫자 체크
-                now = Math.max(arr[i], now);
-                // 만약 크다면 그냥 넘겨도 됨
-                int diff = Math.abs(now - arr[i]);
-                if (diff >= mid){
-                    temp = Math.max(diff, temp);
-                    continue;
-                }
-                else {
-                    check += 1;
-                }
-                // 숫자를 넣을 수가 없다
-                if (check > m){
-                    break;
+        int high = h-l;
+        int low = 0;
+        int ans = high;
+
+        while (low <= high){
+            int mid = (high + low)/ 2;
+            int cnt = 1;
+
+            int curMin = arr[0], curMax = arr[0];
+            for (int i = 1; i < n; i++) {
+                curMin = Math.min(curMin, arr[i]);
+                curMax = Math.max(curMax, arr[i]);
+
+                if (curMax - curMin > mid){
+                    cnt++;
+                    curMin = curMax = arr[i];
                 }
             }
 
-            if (check > m){
-                low = mid + 1;
+            if (cnt <= m){
+                ans = mid;
+                high = mid-1;
             }
             else {
-                ans = Math.min(ans, temp);
+                low = mid + 1;
             }
         }
         System.out.println(ans);
