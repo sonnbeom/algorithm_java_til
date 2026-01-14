@@ -34,6 +34,8 @@ public class BOJ_빗물 {
             }
         }
         System.out.println(Arrays.deepToString(arr));
+        System.out.println(Arrays.deepToString(rain));
+        System.out.println(ans);
     }
     static void func(int sy, int sx){
         ArrayList<int[]>p = new ArrayList<>();
@@ -61,8 +63,12 @@ public class BOJ_빗물 {
         }
         if (right && left){
             for (int[]temp : p){
-                ans += 1;
-
+                int y = temp[0];
+                int x = temp[1];
+                if (!rain[y][x]){
+                    rain[y][x] = true;
+                    ans +=1 ;
+                }
             }
         }
     }
