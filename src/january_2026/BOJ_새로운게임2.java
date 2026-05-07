@@ -32,7 +32,7 @@ public class BOJ_새로운게임2 {
             int y = Integer.parseInt(st.nextToken()) -1;
             int x = Integer.parseInt(st.nextToken()) -1;
             int m = Integer.parseInt(st.nextToken()) -1;
-            horses[y][x][0] =
+//            horses[y][x][0] =
 
         }
 
